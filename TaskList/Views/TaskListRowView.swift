@@ -13,8 +13,21 @@ struct TaskListRowView: View {
     
     var body: some View {
         HStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            Text(title)
+            
+            Spacer()
+            
+            Button {
+                isComplete.toggle()
+            } label: {
+                Image(systemName: isComplete ? "checkmark.circle" : "circle")
+                    .font(.title)
+                    .foregroundColor(isComplete ? .green : .red)
+            }
         }
+        .frame(height: 60)
+        .padding(.trailing)
+        .background(Color.white)
     }
 }
 
@@ -23,6 +36,11 @@ struct TaskListRowView_Previews: PreviewProvider {
     @State static var isComplete: Bool = false
     
     static var previews: some View {
-        TaskListRowView(title: title)
+        ZStack {
+            Color.blue
+            
+            TaskListRowView(title: title)
+        }
+
     }
 }

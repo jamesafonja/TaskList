@@ -22,5 +22,6 @@ struct Task: Identifiable, Codable {
 let testData: [Task] = [
     Task(title: "Buy groceries", isCompleted: false),
     Task(title: "Do laundry", isCompleted: true),
-    Task(title: "Meal prep", isCompleted: false)
+    Task(title: "Meal prep", isCompleted: false),
+    Task(title: "Wash the car", isCompleted: false)
 ]

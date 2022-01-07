@@ -9,7 +9,14 @@ import SwiftUI
 
 struct TaskListView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        // TODO: Show NoTaskView if zero tasks available
+        
+        List {
+            ForEach(testData) { data in
+                TaskListRowView(title: data.title)
+            }
+        }
+        .navigationTitle("Tasks")
     }
 }
 

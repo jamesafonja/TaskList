@@ -12,12 +12,13 @@ struct NoTasksView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 40) {
                 Text("No tasks to view ☹️")
                     .font(.title)
                     .fontWeight(.bold)
                 
                 Text("Got things to do? Click the add button to create a new task")
+                    .font(.title3)
                     .padding()
                 
                 NavigationLink(
@@ -30,16 +31,16 @@ struct NoTasksView: View {
                             .frame(height: 55)
                             .background(
                                 animate ?
-                                    Color.theme.blue :
-                                    Color.theme.green
+                                    Color.theme.primaryAccentColor :
+                                    Color.theme.secondaryAccentColor
                             )
                             .cornerRadius(10.0)
                     })
                     .padding(.horizontal, animate ? 30 : 50)
                     .shadow(
                         color: animate ?
-                            Color.theme.blue.opacity(0.7) :
-                            Color.theme.green.opacity(0.7),
+                            Color.theme.primaryAccentColor.opacity(0.7) :
+                            Color.theme.secondaryAccentColor.opacity(0.7),
                         radius: animate ? 30 : 10,
                         x: 0.0,
                         y: animate ? 50 : 30

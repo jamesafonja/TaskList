@@ -14,6 +14,7 @@ struct TaskListRowView: View {
     var body: some View {
         HStack {
             Text(title)
+                .padding(.leading, 10)
             
             Spacer()
             
@@ -27,7 +28,6 @@ struct TaskListRowView: View {
         }
         .frame(height: 60)
         .padding(.trailing)
-        .background(Color.white)
     }
 }
 
@@ -36,11 +36,7 @@ struct TaskListRowView_Previews: PreviewProvider {
     @State static var isComplete: Bool = false
     
     static var previews: some View {
-        ZStack {
-            Color.blue
-            
-            TaskListRowView(title: title)
-        }
-
+        TaskListRowView(title: title)
+            .previewLayout(.sizeThatFits)
     }
 }

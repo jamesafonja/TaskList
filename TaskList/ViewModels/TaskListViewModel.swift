@@ -7,29 +7,47 @@
 
 import Foundation
 
+// MARK: - TaskListViewModel
 class TaskListViewModel: ObservableObject {
-    // MARK: TaskListViewModel properties
-    @Published var tasks: [Task] = []
-    private let itemsKey = "itemsKey"
+    // MARK: Properties
+    @Published var tasks: [Task] = [] {
+        didSet {
+            saveTasks()
+        }
+    }
+    private let tasksKey = "tasksKey"
 
     // MARK: Initialization
     init() {
         // Get tasks on initialization...
-        getItems()
+        getTasks()
     }
     
     // MARK: CRUD functions
-    func getItems() {
-        let testData: [Task] = [
-            Task(title: "Buy groceries", isCompleted: false),
-            Task(title: "Do laundry", isCompleted: true),
-            Task(title: "Meal prep", isCompleted: false),
-            Task(title: "Wash the car", isCompleted: false)
-        ]
+    func getTasks() {
+        guard
+            let data = UserDefaults.standard.data(forKey: tasksKey),
+            let savedTasks = try? JSONDecoder().decode([Task].self, from: data)
+        else { return }
         
-        tasks.append(contentsOf: testData)
+        self.tasks.append(contentsOf: savedTasks)
     }
     
-    // TODO: Add functions for adding, moving and deleting tasks
-
+    func addTask(title: String) {
+        let newTask = Task(title: title, isCompleted: false)
+        tasks.append(newTask)
+    }
+    
+    func deleteTask(indexSet: IndexSet) {
+        tasks.remove(atOffsets: indexSet)
+    }
+    
+    func moveTask(from: IndexSet, to: Int) {
+        tasks.move(fromOffsets: from, toOffset: to)
+    }
+    
+    func saveTasks() {
+        guard let encodedData = try? JSONEncoder().encode(tasks) else { return }
+        UserDefaults.standard.set(encodedData, forKey: tasksKey)
+    }
 }

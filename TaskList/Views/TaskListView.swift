@@ -18,15 +18,23 @@ struct TaskListView: View {
                     .transition(AnyTransition.opacity.animation(.easeIn))
             } else {
                 List {
-                    ForEach(taskListViewModel.tasks) { data in
-                        TaskListRowView(title: data.title)
+                    ForEach(taskListViewModel.tasks) { task in
+                        TaskListRowView(title: task.title)
                     }
+                    .onDelete(perform: taskListViewModel.deleteTask)
+                    .onMove(perform: taskListViewModel.moveTask)
                 }
                 .listStyle(PlainListStyle())
+                .navigationBarItems(
+                    leading: EditButton(),
+                    trailing:
+                        NavigationLink("Add", destination: AddTaskView())
+                )
             }
         }
         .navigationTitle("Tasks 🕗")
     }
+    
 }
 
 struct TaskListView_Previews: PreviewProvider {

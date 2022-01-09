@@ -14,7 +14,7 @@ struct TaskListApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView { // NavigationView added here to avoid repetition
-                NoTasksView()
+                TaskListView()
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .environmentObject(taskListViewModel)

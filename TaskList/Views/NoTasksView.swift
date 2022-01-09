@@ -47,7 +47,6 @@ struct NoTasksView: View {
                     )
                     .scaleEffect(animate ? 1.1 : 1.0)
                     .offset(y: animate ? -7 : 0)
-                
             }
             .multilineTextAlignment(.center)
             .padding(40)
@@ -57,8 +56,8 @@ struct NoTasksView: View {
     
     func addAnimation() {
         /* The guard statement ensures the animation only runs
-            once and not every time the user visits this screen.
-        */
+            once and not every time the user visits this screen.*/
+        
         guard !animate else { return }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -75,6 +74,9 @@ struct NoTasksView: View {
 
 struct NoTasksView_Previews: PreviewProvider {
     static var previews: some View {
-        NoTasksView()
+        NavigationView {
+            NoTasksView()
+                .navigationTitle("Title")
+        }
     }
 }
